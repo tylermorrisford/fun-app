@@ -1,5 +1,8 @@
 import React from "react";
-import styled from 'styled-components'
+import {
+    Link
+  } from "react-router-dom";
+import styled from 'styled-components';
 
 const CoolNav = styled.nav`
     height: 100px;
@@ -12,24 +15,26 @@ const CoolNav = styled.nav`
     justify-content: center;
 `;
 
-const Link = styled.a`
-    text-decoration: none;
-    margin: 5px;
-    color: white;
-`
+const linkStyle = {
+    textDecoration: 'none', 
+    margin: 10, 
+    color: 'white'
+}
 
-const Brand = styled.span`
-    font-weight: 600;
-    margin-right: 25px;
-`
+const brandStyle = {
+    textDecoration: 'none',
+    color: 'white',
+    fontWeight: 700,
+    marginRight: 25
+}
 
 const Navbar = () => {
     return(
         <CoolNav>
-            <Brand>ThisApp</Brand>
-            <Link href="https://google.com">API</Link>
-            <Link href="https://google.com">data-vis</Link>
-            <Link href="https://google.com">misc.</Link>
+            <Link style={brandStyle} to="/">ThisApp</Link>
+            <Link style={linkStyle} to="/api">API</Link>
+            <Link style={linkStyle} to="/data">data-vis</Link>
+            <Link style={linkStyle} to="/misc">misc.</Link>
         </CoolNav>
     )
 }

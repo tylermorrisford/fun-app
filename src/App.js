@@ -1,26 +1,34 @@
 import React from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
 import Navbar from './components/Navbar';
-import styled from 'styled-components'
+import Home from './components/Home';
+import APIEX from './components/APIEX';
+import DataVis from './components/DataVis';
+import Misc from './components/Misc';
 import './App.css';
-
-const Callout = styled.span`
-  margin-bottom: 0;
-  font-size: 0.8em;
-  font-weight: 200;
-`
-
-const Brand = styled.h3`
-  margin-top: 2px;
-`
 
 function App() {
   return (
     <div className="App">
+      <Router>
       <Navbar/>
-      <header className="App-header">
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/api" component={APIEX} />
+        <Route exact path="/data" component={DataVis} />
+        <Route exact path="/misc" component={Misc} />
+        {/* <Route component={NoMatch} /> */}
+      </Switch>
+      {/* <Footer /> */}
+      </Router>
+      {/* <header className="App-header">
         <Callout>Welcome to</Callout>
         <Brand>ThisApp!</Brand>
-      </header>
+      </header> */}
     </div>
   );
 }
