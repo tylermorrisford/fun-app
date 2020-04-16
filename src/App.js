@@ -25,10 +25,6 @@ function App() {
       </Switch>
       {/* <Footer /> */}
       </Router>
-      {/* <header className="App-header">
-        <Callout>Welcome to</Callout>
-        <Brand>ThisApp!</Brand>
-      </header> */}
     </div>
   );
 }
