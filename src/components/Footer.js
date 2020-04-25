@@ -5,9 +5,7 @@ import '../App.css';
 const Footer = () => {
 
     const currentDate = new Date();
-    console.log(currentDate);
     
-
     const Foot = styled.footer`
         margin: 0;
         width: 100%;
@@ -27,6 +25,5 @@ const Footer = () => {
 
     )
 }
-
 
 export default Footer
