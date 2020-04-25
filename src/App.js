@@ -9,6 +9,7 @@ import Home from './components/Home';
 import APIEX from './components/APIEX';
 import DataVis from './components/DataVis';
 import Misc from './components/Misc';
+import Footer from './components/Footer';
 import './App.css';
 
 function App() {
@@ -23,7 +24,7 @@ function App() {
         <Route exact path="/misc" component={Misc} />
         {/* <Route component={NoMatch} /> */}
       </Switch>
-      {/* <Footer /> */}
+      <Footer /> 
       </Router>
     </div>
   );
