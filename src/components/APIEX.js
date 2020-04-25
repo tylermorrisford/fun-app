@@ -32,7 +32,11 @@ class APIEX extends React.Component{
       this.setState({
         ready: true,
         locationdata: data,
-        temp: data.main.temp
+        temp: data.main.temp,
+        description: data.weather[0].description,
+        name: data.name,
+        location: '',
+        country: data.sys.country
       })
     })
   }
