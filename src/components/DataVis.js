@@ -3,18 +3,27 @@ import styled from 'styled-components'
 import '../App.css';
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
 
-const Callout = styled.span`
-margin-bottom: 0;
-font-size: 0.8em;
-font-weight: 200;
-`
 
-const Brand = styled.h3`
-margin-top: 2px;
-`
-const historicalUtahJson = 'https://covidtracking.com/api/v1/states/ut/daily.json';
 
-const DataVis = () => {
+class DataVis extends React.Component{
+  constructor(){
+    super()
+    this.state = {
+      utahData: []
+    }
+  }
+  
+  componentDidMount() {
+    const historicalUtahJson = 'https://covidtracking.com/api/v1/states/ut/daily.json';
+      fetch(historicalUtahJson)
+      .then(response => {
+        return response.json();
+      }).then(data => {
+        console.log('data', data);
+      })    
+  }
+
+  render() {
   const data = [{name: '3/7', positive: 1}, {name: '3/14', positive: 6}, {name: '3/21', positive: 136}, {name: '3/28', positive: 602}, {name: 'April 4', positive: 1428}, {name: '4/11', positive: 2206}, {name: '4/18', positive: 2931}, {name: '4/24', positive: 3782}];
 
   const renderLineChart = (
@@ -28,13 +37,24 @@ const DataVis = () => {
   );
     return(
         <header className="App-header">
-        <Callout>this is</Callout>
-        <Brand>DataVis</Brand>
+        <Callout>Here's some simple data visualization</Callout>
+        {/* <Brand>DataVis</Brand> */}
         <br/>
         <h4>Positive Covid-19 cases in Utah</h4>
         {renderLineChart}
       </header>
     )
 }
+}
 
 export default DataVis;
+
+const Callout = styled.span`
+margin-bottom: 0;
+font-size: 0.8em;
+font-weight: 200;
+`
+
+const Brand = styled.h3`
+margin-top: 2px;
+`
