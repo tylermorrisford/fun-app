@@ -9,7 +9,8 @@ class DataVis extends React.Component{
   constructor(){
     super()
     this.state = {
-      utahData: []
+      utahData: [],
+      isLoaded: false
     }
   }
   
@@ -20,28 +21,46 @@ class DataVis extends React.Component{
         return response.json();
       }).then(data => {
         console.log('data', data);
+        const utahStats = data.reverse();
+        this.setState({utahData: utahStats, isLoaded: true})
+        console.log('utah data => ', this.state.utahData)
       })    
   }
 
   render() {
-  const data = [{name: '3/7', positive: 1}, {name: '3/14', positive: 6}, {name: '3/21', positive: 136}, {name: '3/28', positive: 602}, {name: 'April 4', positive: 1428}, {name: '4/11', positive: 2206}, {name: '4/18', positive: 2931}, {name: '4/24', positive: 3782}];
 
+  const CustomTooltip = ({ active, payload, label }) => {
+    if (active) {
+      console.log('payload? ', payload[0].payload.positive)
+      console.log('label is type: ', typeof(label))
+      return (
+        <div className="custom-tooltip">
+          <p className="label">{`Date: ${label.toString().slice(4)}`}<br/>
+          {`positive cases: ${payload[0].payload.positive}`}</p>
+        </div>
+      );
+    }
+  
+    return null;
+  };
+
+  
   const renderLineChart = (
-    <LineChart styee={{color: 'white'}} width={800} height={500} data={data} margin={{ top: 15, right: 20, bottom: 5, left: 20 }}>
+    <LineChart styee={{color: 'white'}} width={800} height={600} data={this.state.utahData} margin={{ top: 15, right: 20, bottom: 15, left: 20 }}>
       <Line type="monotone" dataKey="positive" stroke="#8884d8" />
       <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-      <XAxis dataKey="name" />
-      <YAxis dataKey="positive" ticks={[0, 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000]}/>
-      <Tooltip />
+      <XAxis dataKey="date" />
+      <YAxis dataKey="positive" ticks={[0, 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 5500, 6000]}/>
+      <Tooltip 
+      content={this.state.isLoaded ? CustomTooltip : null}
+      />
     </LineChart>
   );
     return(
         <header className="App-header">
         <Callout>Here's some simple data visualization</Callout>
-        {/* <Brand>DataVis</Brand> */}
-        <br/>
         <h4>Positive Covid-19 cases in Utah</h4>
-        {renderLineChart}
+        {this.state.isLoaded ? renderLineChart : 'Loading...'}
       </header>
     )
 }
@@ -50,11 +69,7 @@ class DataVis extends React.Component{
 export default DataVis;
 
 const Callout = styled.span`
-margin-bottom: 0;
+margin-bottom: -20px;
 font-size: 0.8em;
 font-weight: 200;
-`
-
-const Brand = styled.h3`
-margin-top: 2px;
 `
