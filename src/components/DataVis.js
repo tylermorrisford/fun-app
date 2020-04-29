@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components'
 import '../App.css';
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
+import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Label, ResponsiveContainer } from 'recharts';
 
 
 
@@ -46,21 +46,29 @@ class DataVis extends React.Component{
 
   
   const renderLineChart = (
-    <LineChart styee={{color: 'white'}} width={800} height={600} data={this.state.utahData} margin={{ top: 15, right: 20, bottom: 15, left: 20 }}>
+    <ResponsiveContainer width='80%' height={600}>
+    <LineChart style={{color: 'white'}} data={this.state.utahData} margin={{ top: 15, right: 35, bottom: 35, left: 35 }}>
       <Line type="monotone" dataKey="positive" stroke="#8884d8" />
-      <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-      <XAxis dataKey="date" />
-      <YAxis dataKey="positive" ticks={[0, 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 5500, 6000]}/>
+      <CartesianGrid stroke="#ccc" strokeDasharray="2 2" />
+      <XAxis dataKey="date" tickFormatter={(label) => `${label.toString().slice(6)}`}>
+        <Label className="white" value="Date" offset={-25} position="insideBottom"/>
+      </XAxis>
+      <YAxis dataKey="positive">
+        <Label className="white" value="Positive Cases" angle="-90" offset={-25} position="insideLeft"/>
+      </YAxis>
       <Tooltip 
       content={this.state.isLoaded ? CustomTooltip : null}
       />
     </LineChart>
+    </ResponsiveContainer>
   );
     return(
         <header className="App-header">
         <Callout>Here's some simple data visualization</Callout>
         <h4>Positive Covid-19 cases in Utah</h4>
         {this.state.isLoaded ? renderLineChart : 'Loading...'}
+        <Words>The first positive case was recorded on March 7.<br/>
+        <em>Data provided by covidtracking.com, updated daily.</em></Words>
       </header>
     )
 }
@@ -72,4 +80,7 @@ const Callout = styled.span`
 margin-bottom: -20px;
 font-size: 0.8em;
 font-weight: 200;
+`
+const Words = styled.p`
+font-size: 0.6em;
 `
