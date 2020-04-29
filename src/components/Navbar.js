@@ -34,7 +34,7 @@ const Navbar = () => {
             <Link style={brandStyle} to="/">ThisApp</Link>
             <Link style={linkStyle} to="/api">API</Link>
             <Link style={linkStyle} to="/data">data-vis</Link>
-            <Link style={linkStyle} to="/misc">misc.</Link>
+            <Link style={linkStyle} to="/misc">about</Link>
         </CoolNav>
     )
 }

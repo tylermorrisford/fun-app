@@ -2,6 +2,19 @@ import React from 'react';
 import styled from 'styled-components'
 import '../App.css';
 
+
+const About = () => {
+    return(
+        <header className="App-header">
+        <Callout>this is</Callout>
+        <Brand>Miscellaneous stuff...</Brand>
+      </header>
+    )
+}
+
+export default About;
+
+
 const Callout = styled.span`
   margin-bottom: 0;
   font-size: 0.8em;
@@ -11,14 +24,3 @@ const Callout = styled.span`
 const Brand = styled.h3`
   margin-top: 2px;
 `
-
-const Misc = () => {
-    return(
-        <header className="App-header">
-        <Callout>this is</Callout>
-        <Brand>Miscellaneous stuff...</Brand>
-      </header>
-    )
-}
-
-export default Misc;

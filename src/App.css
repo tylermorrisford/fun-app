@@ -42,3 +42,7 @@
   padding: 5px 10px;
   border-radius: 5px;
 }
+
+.white{
+  color: white !important;
+}
