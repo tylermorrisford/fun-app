@@ -17,6 +17,8 @@ const Home = () => {
         <header className="App-header">
         <Callout>Welcome to</Callout>
         <Brand>ThisApp!</Brand>
+        <p>ThisApp is just here to keep us company during the 'great Quarantine of 2020' due to the Covid-19 pandemic. 
+          Does one capitalize 'pandemic'? No way of knowing I guess. </p>
       </header>
     )
 }
