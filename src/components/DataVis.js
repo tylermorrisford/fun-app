@@ -67,8 +67,8 @@ class DataVis extends React.Component{
         <Callout>Here's some simple data visualization</Callout>
         <h4>Positive Covid-19 cases in Utah</h4>
         {this.state.isLoaded ? renderLineChart : 'Loading...'}
-        <Words>The first positive case was recorded on March 7.<br/>
-        <em>Data provided by covidtracking.com, updated daily.</em></Words>
+        <Words>First positive case recorded March 7.<br/>
+        <em>Fetched from covidtracking.com, updated daily.</em></Words>
       </header>
     )
 }

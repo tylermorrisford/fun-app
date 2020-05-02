@@ -8,8 +8,8 @@ const Home = () => {
         <Callout>Welcome to</Callout>
         <Brand>ThisApp!</Brand>
         <Text><Words>ThisApp is just here to keep us (us === me) company during the 'great Quarantine of 2020', due to the Covid-19 pandemic. 
-         <br/>Does one capitalize 'pandemic'? I could google it, but... will I? Anywho, I hope you're safe. If you're wondering how many cases 
-         of the novel coronavirus there are in my state, click the data-vis link for a handy chart.</Words></Text>
+         <br/>It would be super easy to use javascript to put the current date right [here], but why ruin our near defeat of the social construct that is time? Whoa. Sorry. Anywho, I hope you're safe. If you're wondering how many cases 
+         of the novel coronavirus there are in my state, <br/>click the data-vis link for a handy chart.</Words></Text>
       </header>
     )
 }

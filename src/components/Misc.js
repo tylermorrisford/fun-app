@@ -7,7 +7,8 @@ const About = () => {
     return(
         <header className="App-header">
         <Callout>this is</Callout>
-        <Brand>Miscellaneous stuff...</Brand>
+        <Brand>Some stuff about MEEEE!</Brand>
+        <p>or it will be when i get around to it.</p>
       </header>
     )
 }
