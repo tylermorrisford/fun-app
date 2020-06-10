@@ -50,7 +50,7 @@ class DataVis extends React.Component{
     <LineChart style={{color: 'white'}} data={this.state.utahData} margin={{ top: 15, right: 35, bottom: 35, left: 35 }}>
       <Line type="monotone" dataKey="positive" stroke="#8884d8" />
       <CartesianGrid stroke="#ccc" strokeDasharray="2 2" />
-      <XAxis dataKey="date" tickFormatter={(label) => `${label.toString().slice(6)}`}>
+      <XAxis dataKey="date" tickFormatter={(label) => `${label.toString().slice(7)}`}>
         <Label className="white" value="Date" offset={-25} position="insideBottom"/>
       </XAxis>
       <YAxis dataKey="positive">
@@ -69,6 +69,7 @@ class DataVis extends React.Component{
         {this.state.isLoaded ? renderLineChart : 'Loading...'}
         <Words>First positive case recorded March 7.<br/>
         <em>Fetched from covidtracking.com, updated daily.</em></Words>
+        <p>Please use this as one data source to help you make decisions on what kinds of activities are appropriate under current conditions.</p>
       </header>
     )
 }
