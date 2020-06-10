@@ -69,7 +69,7 @@ class DataVis extends React.Component{
         {this.state.isLoaded ? renderLineChart : 'Loading...'}
         <Words>First positive case recorded March 7.<br/>
         <em>Fetched from covidtracking.com, updated daily.</em></Words>
-        <p>Please use this as one data source to help you make decisions on what kinds of activities are appropriate under current conditions.</p>
+        <p>Please use this as one data source to help you make decisions on what kinds of activities<br/> are appropriate under current conditions.</p>
       </header>
     )
 }
