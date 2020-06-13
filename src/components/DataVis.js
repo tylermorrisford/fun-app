@@ -64,12 +64,14 @@ class DataVis extends React.Component{
   );
     return(
         <header className="App-header">
-        <Callout>Here's some simple data visualization</Callout>
+        <Callout>{" "}</Callout>
         <h4>Positive Covid-19 cases in Utah</h4>
         {this.state.isLoaded ? renderLineChart : 'Loading...'}
         <Words>First positive case recorded March 7.<br/>
-        <em>Fetched from covidtracking.com, updated daily.</em></Words>
-        <p>Please use this as one data source to help you make decisions on what kinds of activities<br/> are appropriate under current conditions.</p>
+        <em>Fetched from covidtracking.com, updated daily.</em>
+        <br />
+        Use this as a data source to help you make decisions on what kinds of activities<br/> are appropriate under current conditions.
+        </Words>
       </header>
     )
 }
