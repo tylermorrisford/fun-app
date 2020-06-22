@@ -10,9 +10,11 @@ class DataVis extends React.Component{
     super()
     this.state = {
       utahData: [],
-      isLoaded: false
+      isLoaded: false,
+      dataLength: 0
     }
   }
+  
   
   componentDidMount() {
     const historicalUtahJson = 'https://covidtracking.com/api/v1/states/ut/daily.json';
@@ -22,21 +24,25 @@ class DataVis extends React.Component{
       }).then(data => {
         console.log('data', data);
         const utahStats = data.reverse();
-        this.setState({utahData: utahStats, isLoaded: true})
-        console.log('utah data => ', this.state.utahData)
+        this.setState({
+          utahData: utahStats, 
+          isLoaded: true,
+          dataLength: utahStats.length
+        })
       })    
   }
 
   render() {
 
+  const len = this.state.dataLength - 1
+
   const CustomTooltip = ({ active, payload, label }) => {
     if (active) {
-      console.log('payload? ', payload[0].payload.positive)
-      console.log('label is type: ', typeof(label))
       return (
         <div className="custom-tooltip">
           <p className="label">{`Date: ${label.toString().slice(4)}`}<br/>
-          {`positive cases: ${payload[0].payload.positive}`}</p>
+          {`Positive Cases: ${payload[0].payload.positive}`}<br/>
+          {`Increase: ${payload[0].payload.positiveIncrease}`}</p>
         </div>
       );
     }
@@ -47,14 +53,14 @@ class DataVis extends React.Component{
   
   const renderLineChart = (
     <ResponsiveContainer width='80%' height={600}>
-    <LineChart style={{color: 'white'}} data={this.state.utahData} margin={{ top: 15, right: 35, bottom: 35, left: 35 }}>
+    <LineChart style={{color: 'white'}} data={this.state.utahData} margin={{ top: 15, right: 35, bottom: 35, left: 55 }}>
       <Line type="monotone" dataKey="positive" stroke="#8884d8" />
       <CartesianGrid stroke="#ccc" strokeDasharray="2 2" />
       <XAxis dataKey="date" tickFormatter={(label) => `${label.toString().slice(7)}`}>
         <Label className="white" value="Date" offset={-25} position="insideBottom"/>
       </XAxis>
       <YAxis dataKey="positive">
-        <Label className="white" value="Positive Cases" angle="-90" offset={-25} position="insideLeft"/>
+        <Label className="white" value="Positive Cases" angle={-90} offset={-40} position="insideLeft"/>
       </YAxis>
       <Tooltip 
       content={this.state.isLoaded ? CustomTooltip : null}
@@ -67,10 +73,12 @@ class DataVis extends React.Component{
         <Callout>{" "}</Callout>
         <h4>Positive Covid-19 cases in Utah</h4>
         {this.state.isLoaded ? renderLineChart : 'Loading...'}
-        <Words>First positive case recorded March 7.<br/>
+        <Words>
+        {`Current number of patients hospitalized:
+          ${this.state.isLoaded ? this.state.utahData[len].hospitalizedCurrently : ''}
+         `} <br /><br />
+          First positive case recorded March 7.<br/>
         <em>Fetched from covidtracking.com, updated daily.</em>
-        <br />
-        Use this as a data source to help you make decisions on what kinds of activities<br/> are appropriate under current conditions.
         </Words>
       </header>
     )
