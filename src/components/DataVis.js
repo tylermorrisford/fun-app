@@ -53,11 +53,11 @@ class DataVis extends React.Component{
   
   const renderLineChart = (
     <ResponsiveContainer width='80%' height={600}>
-    <LineChart style={{color: 'white'}} data={this.state.utahData} margin={{ top: 15, right: 35, bottom: 35, left: 55 }}>
+    <LineChart style={{color: 'white'}} data={this.state.utahData} margin={{ top: 15, right: 35, bottom: 35, left: 50 }}>
       <Line type="monotone" dataKey="positive" stroke="#8884d8" />
-      <CartesianGrid stroke="#ccc" strokeDasharray="2 2" />
-      <XAxis dataKey="date" tickFormatter={(label) => `${label.toString().slice(7)}`}>
-        <Label className="white" value="Date" offset={-25} position="insideBottom"/>
+      <CartesianGrid stroke="#ccc" strokeDasharray="1 1" />
+      <XAxis dataKey="date" tickFormatter={(label) => `${label.toString().substring(5,6)}`}>
+        <Label className="white" value="Month" offset={-25} position="insideBottom"/>
       </XAxis>
       <YAxis dataKey="positive">
         <Label className="white" value="Positive Cases" angle={-90} offset={-40} position="insideLeft"/>
@@ -72,11 +72,11 @@ class DataVis extends React.Component{
         <header className="App-header">
         <Callout>{" "}</Callout>
         <h4>Positive Covid-19 cases in Utah</h4>
-        {this.state.isLoaded ? renderLineChart : 'Loading...'}
-        <Words>
         {`Current number of patients hospitalized:
           ${this.state.isLoaded ? this.state.utahData[len].hospitalizedCurrently : ''}
-         `} <br /><br />
+         `}
+        {this.state.isLoaded ? renderLineChart : 'Loading...'}
+        <Words>
           First positive case recorded March 7.<br/>
         <em>Fetched from covidtracking.com, updated daily.</em>
         </Words>
