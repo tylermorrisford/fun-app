@@ -6,9 +6,9 @@ import '../App.css';
 const About = () => {
     return(
         <header className="App-header">
-        <Callout>this will be</Callout>
         <Brand>Some stuff about me</Brand>
-        <p>when i get around to it.</p>
+        <Callout>I'm a software engineer in SLC</Callout><br/>
+        <Callout>When we're not dealing with a pandemic, <br/>I like to play hockey and enjoy a beer with friends. *sigh*</Callout>
       </header>
     )
 }
