@@ -71,7 +71,7 @@ class DataVis extends React.Component{
     return(
         <header className="App-header">
         <Callout>{" "}</Callout>
-        <h4>Positive Covid-19 cases in Utah</h4>
+        <h4>Positive COVID-19 cases in Utah</h4>
         {`Current number of patients hospitalized:
           ${this.state.isLoaded ? this.state.utahData[len].hospitalizedCurrently : ''}
          `}
