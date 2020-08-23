@@ -1,40 +1,38 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components'
 import '../App.css';
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Label, ResponsiveContainer } from 'recharts';
 
 
 
-class DataVis extends React.Component{
-  constructor(){
-    super()
-    this.state = {
-      utahData: [],
-      isLoaded: false,
-      dataLength: 0
-    }
-  }
-  
-  
-  componentDidMount() {
-    const historicalUtahJson = 'https://covidtracking.com/api/v1/states/ut/daily.json';
+const DataVis = () => {
+  const [utahData, setUtahData] = useState([])
+  const [isLoaded, setIsLoaded] = useState(false)
+  const [dataLength, setDataLength] = useState(0)
+
+  useEffect(() => {
+    getData();
+  }, [])
+
+
+  const getData = () => {
+    const historicalUtahJson = 'https://api.covidtracking.com/v1/states/ut/daily.json';
       fetch(historicalUtahJson)
       .then(response => {
         return response.json();
       }).then(data => {
         console.log('data', data);
         const utahStats = data.reverse();
-        this.setState({
-          utahData: utahStats, 
-          isLoaded: true,
-          dataLength: utahStats.length
-        })
+        // useState
+          setUtahData(utahStats) 
+          setIsLoaded(true)
+          setDataLength(utahStats.length)
       })    
   }
 
-  render() {
-
-  const len = this.state.dataLength - 1
+  const len = dataLength - 1;
+  console.log('this is len: ', len);
+  
 
   const CustomTooltip = ({ active, payload, label }) => {
     if (active) {
@@ -46,14 +44,13 @@ class DataVis extends React.Component{
         </div>
       );
     }
-  
     return null;
   };
 
   
   const renderLineChart = (
     <ResponsiveContainer width='80%' height={600}>
-    <LineChart style={{color: 'white'}} data={this.state.utahData} margin={{ top: 15, right: 35, bottom: 35, left: 50 }}>
+    <LineChart style={{color: 'white'}} data={utahData} margin={{ top: 15, right: 35, bottom: 35, left: 50 }}>
       <Line type="monotone" dataKey="positive" stroke="#8884d8" />
       <CartesianGrid stroke="#ccc" strokeDasharray="1 1" />
       <XAxis dataKey="date" tickFormatter={(label) => `${label.toString().substring(5,6)}`}>
@@ -63,26 +60,26 @@ class DataVis extends React.Component{
         <Label className="white" value="Positive Cases" angle={-90} offset={-40} position="insideLeft"/>
       </YAxis>
       <Tooltip 
-      content={this.state.isLoaded ? CustomTooltip : null}
+      content={isLoaded ? CustomTooltip : null}
       />
     </LineChart>
     </ResponsiveContainer>
   );
+
     return(
         <header className="App-header">
         <Callout>{" "}</Callout>
         <h4>Positive COVID-19 cases in Utah</h4>
         {`Current number of patients hospitalized:
-          ${this.state.isLoaded ? this.state.utahData[len].hospitalizedCurrently : ''}
+          ${len > 1 ? utahData[len].hospitalizedCurrently : ''}
          `}
-        {this.state.isLoaded ? renderLineChart : 'Loading...'}
+        {isLoaded ? renderLineChart : 'Loading...'}
         <Words>
           First positive case was recorded on March 7.<br/>
         <em>Data fetched from covidtracking.com, which is updated daily.</em>
         </Words>
       </header>
     )
-}
 }
 
 export default DataVis;
