@@ -9,37 +9,41 @@ const DataVis = () => {
   const [utahData, setUtahData] = useState([])
   const [isLoaded, setIsLoaded] = useState(false)
   const [dataLength, setDataLength] = useState(0)
+  const [queryState, setQueryState] = useState(`ut`);
+  const [stateName, setStateName] = useState(`Utah`);
 
   useEffect(() => {
+    const getData = () => {
+      const historicalUtahJson = `https://api.covidtracking.com/v1/states/${queryState}/daily.json`;
+        fetch(historicalUtahJson)
+        .then(response => {
+          return response.json();
+        }).then(data => {
+          console.log('data', data);
+          const utahStats = data.reverse();
+          // useState functions
+            setUtahData(utahStats) 
+            setIsLoaded(true)
+            setDataLength(utahStats.length)
+        })    
+    }
     getData();
-  }, [])
+  }, [queryState])
 
 
-  const getData = () => {
-    const historicalUtahJson = 'https://api.covidtracking.com/v1/states/ut/daily.json';
-      fetch(historicalUtahJson)
-      .then(response => {
-        return response.json();
-      }).then(data => {
-        console.log('data', data);
-        const utahStats = data.reverse();
-        // useState
-          setUtahData(utahStats) 
-          setIsLoaded(true)
-          setDataLength(utahStats.length)
-      })    
+  const len = dataLength - 1;  
+
+  const formatDateString = (date) => {
+    let newDate = date.substr(0, 2) + '/' + date.substr(2);
+    return newDate;
   }
-
-  const len = dataLength - 1;
-  console.log('this is len: ', len);
-  
 
   const CustomTooltip = ({ active, payload, label }) => {
     if (active) {
       return (
         <div className="custom-tooltip">
-          <p className="label">{`Date: ${label.toString().slice(4)}`}<br/>
-          {`Positive Cases: ${payload[0].payload.positive}`}<br/>
+          <p className="label">{`Date: ${formatDateString(label.toString().slice(4))}`}<br/>
+          {`Positive Cases: ${payload[0].payload.positive.toLocaleString()}`}<br/>
           {`Increase: ${payload[0].payload.positiveIncrease}`}</p>
         </div>
       );
@@ -69,10 +73,18 @@ const DataVis = () => {
     return(
         <header className="App-header">
         <Callout>{" "}</Callout>
-        <h4>Positive COVID-19 cases in Utah</h4>
-        {`Current number of patients hospitalized:
+        <h5>Positive COVID-19 cases in {stateName}</h5>
+        <label htmlFor="states"><Words>Choose a different state: </Words></label>
+        <select id="states" onChange={(e) => {setQueryState(e.target.value); setStateName(e.target.value.toUpperCase())}}>
+          <option id="Utah" value="ut" defaultValue>Utah</option>
+          <option id="New York" value="ny">New York</option>
+          <option id="California" value="ca">California</option>
+          <option id="Florida" value="fl">Florida</option>
+          <option id="Texas" value="tx">Texas</option>
+        </select>
+        <h6>{`Current number of patients hospitalized:
           ${len > 1 ? utahData[len].hospitalizedCurrently : ''}
-         `}
+          `}</h6>
         {isLoaded ? renderLineChart : 'Loading...'}
         <Words>
           First positive case was recorded on March 7.<br/>
