@@ -71,17 +71,66 @@ const DataVis = () => {
         <header className="App-header">
         <Callout>{" "}</Callout>
         <h5>Positive COVID-19 cases in {stateName}</h5>
-        <label htmlFor="states"><Words>Choose a different state: </Words></label>
-        <select id="states" onChange={(e) => {setQueryState(e.target.value); setStateName(e.target.value.toUpperCase())}}>
-          <option id="Utah" value="ut">Utah</option>
-          <option id="New York" value="ny">New York</option>
-          <option id="California" value="ca">California</option>
-          <option id="Florida" value="fl">Florida</option>
-          <option id="Texas" value="tx">Texas</option>
-        </select>
         <h6>{`Current number of patients hospitalized:
           ${utahData.length > 1 ? utahData[utahData.length -1].hospitalizedCurrently : ''}
           `}</h6>
+          <div style={{display: 'flex', padding: '10px auto'}}>
+          <label htmlFor="states"><Words>Choose a different state: </Words></label>
+          <div style={{padding: "5px"}}>
+          <Select id="states" onChange={(e) => {setQueryState(e.target.value); setStateName(e.target.value.toUpperCase())}}>
+            <option value="al">Alabama</option>
+            <option value="ak">Alaska</option>
+            <option value="az">Arizona</option>
+            <option value="ar">Arkansas</option>
+            <option value="ca">California</option>
+            <option value="co">Colorado</option>
+            <option value="ct">Connecticut</option>
+            <option value="de">Delaware</option>
+            <option value="fl">Florida</option>
+            <option value="ga">Georgia</option>
+            <option value="hi">Hawaii</option>
+            <option value="id">Idaho</option>
+            <option value="il">Illinois</option>
+            <option value="in">Indiana</option>
+            <option value="ia">Iowa</option>
+            <option value="ks">Kansas</option>
+            <option value="ky">Kentucky</option>
+            <option value="la">Louisiana</option>
+            <option value="mn">Maine</option>
+            <option value="md">Maryland</option>
+            <option value="ma">Massachusetts</option>
+            <option value="mi">Michigan</option>
+            <option value="mn">Minnesota</option>
+            <option value="ms">Mississippi</option>
+            <option value="mo">Missouri</option>
+            <option value="mt">Montana</option>
+            <option value="ne">Nebraska</option>
+            <option value="nv">Nevada</option>
+            <option value="nh">New Hampshire</option>
+            <option value="nj">New Jersey</option>
+            <option value="nm">New Mexico</option>
+            <option value="ny">New York</option>
+            <option value="nc">North Carolina</option>
+            <option value="nd">North Dakota</option>
+            <option value="oh">Ohio</option>
+            <option value="ok">Oklahoma</option>
+            <option value="or">Oregon</option>
+            <option value="pn">Pennsylvania</option>
+            <option value="ri">Rhode Island</option>
+            <option value="sc">South Carolina</option>
+            <option value="sd">South Dakota</option>
+            <option value="tn">Tennessee</option>
+            <option value="tx">Texas</option>
+            <option value="ut" selected defaultValue>Utah</option>
+            <option value="vt">Vermont</option>
+            <option value="va">Virginia</option>
+            <option value="wa">Washington</option>
+            <option value="wv">West Virginia</option>
+            <option value="wi">Wisconsin</option>
+            <option value="wy">Wyoming</option>
+          </Select>
+          </div>
+          </div>
         {isLoaded ? renderLineChart : 'Loading...'}
         <Words>
           First positive case was recorded on March 7.<br/>
@@ -100,4 +149,11 @@ font-weight: 200;
 `
 const Words = styled.p`
 font-size: 0.6em;
+`
+const Select = styled.select`
+height: '20px'; 
+width: '150px';
+border: none;
+color: white;
+background-color: darkslategray;
 `
