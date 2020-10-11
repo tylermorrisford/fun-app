@@ -21,7 +21,7 @@ const DataVis = () => {
         }).then(data => {
           console.log('data', data);
           const utahStats = data.reverse();
-          // useState functions
+          // useState functions - can refactor the names for clarity
             setUtahData(utahStats) 
             setIsLoaded(true)
             setDataLength(utahStats.length)
