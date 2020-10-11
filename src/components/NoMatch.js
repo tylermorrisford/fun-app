@@ -15,7 +15,7 @@ const NoMatch = () => {
         <header className="App-header">
         <Brand>Sorry...</Brand>
         <Callout>looks like that page doesn't exist.</Callout>
-        <Link style={linkStyle} to='/'>head to the home page ></Link>
+        <Link style={linkStyle} to='/'>head to the home page &rarr;</Link>
       </header>
     )
 }
