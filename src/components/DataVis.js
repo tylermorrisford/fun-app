@@ -8,7 +8,6 @@ import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Label, Responsiv
 const DataVis = () => {
   const [utahData, setUtahData] = useState([])
   const [isLoaded, setIsLoaded] = useState(false)
-  const [dataLength, setDataLength] = useState(0)
   const [queryState, setQueryState] = useState(`ut`);
   const [stateName, setStateName] = useState(`Utah`);
 
@@ -24,14 +23,12 @@ const DataVis = () => {
           // useState functions - can refactor the names for clarity
             setUtahData(utahStats) 
             setIsLoaded(true)
-            setDataLength(utahStats.length)
         })    
     }
     getData();
   }, [queryState])
 
 
-  const len = dataLength - 1;  
 
   const formatDateString = (date) => {
     let newDate = date.substr(0, 2) + '/' + date.substr(2);
@@ -76,14 +73,14 @@ const DataVis = () => {
         <h5>Positive COVID-19 cases in {stateName}</h5>
         <label htmlFor="states"><Words>Choose a different state: </Words></label>
         <select id="states" onChange={(e) => {setQueryState(e.target.value); setStateName(e.target.value.toUpperCase())}}>
-          <option id="Utah" value="ut" defaultValue>Utah</option>
+          <option id="Utah" value="ut">Utah</option>
           <option id="New York" value="ny">New York</option>
           <option id="California" value="ca">California</option>
           <option id="Florida" value="fl">Florida</option>
           <option id="Texas" value="tx">Texas</option>
         </select>
         <h6>{`Current number of patients hospitalized:
-          ${len > 1 ? utahData[len].hospitalizedCurrently : ''}
+          ${utahData.length > 1 ? utahData[utahData.length -1].hospitalizedCurrently : ''}
           `}</h6>
         {isLoaded ? renderLineChart : 'Loading...'}
         <Words>
