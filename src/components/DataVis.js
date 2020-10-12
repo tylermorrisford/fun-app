@@ -121,7 +121,7 @@ const DataVis = () => {
             <option value="sd">South Dakota</option>
             <option value="tn">Tennessee</option>
             <option value="tx">Texas</option>
-            <option value="ut" selected defaultValue>Utah</option>
+            <option value="ut"selected>Utah</option>
             <option value="vt">Vermont</option>
             <option value="va">Virginia</option>
             <option value="wa">Washington</option>

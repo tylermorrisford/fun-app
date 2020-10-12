@@ -9,10 +9,3 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
-
-
-/* TODO: check buildpack
-          fix about page
-          verify API 
-          remove console logs//add in funnier console.logs
-*/
