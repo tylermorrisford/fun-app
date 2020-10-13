@@ -4,6 +4,7 @@ import '../App.css';
 
 const key = process.env.REACT_APP_WEATHER_API_KEY;
 const url = `https://api.openweathermap.org/data/2.5/weather?id=5780993&units=Imperial&appid=${key}`;
+var dayjs = require('dayjs');
 
 class APIEX extends React.Component{
    constructor(){
@@ -23,20 +24,23 @@ class APIEX extends React.Component{
 
    
    componentDidMount(){
+     console.log("I know... ohhh wwwwooooooowwwww, a weather api app.... ammaaazzzzing! I know. \n\n I know.");
     fetch(url)
     .then(response => {
       return response.json();
     }).then(data => {
-      console.log('data', data);
-      console.log('curr temp', data.main.temp)
+      console.log('success! data: ', data);
       this.setState({
         ready: true,
         locationdata: data,
         temp: data.main.temp,
+        feels: data.main.feels_like,
         description: data.weather[0].description,
         name: data.name,
         location: '',
-        country: data.sys.country
+        country: data.sys.country,
+        sunrise: data.sys.sunrise * 1000,
+        sunset: data.sys.sunset * 1000
       })
     })
   }
@@ -60,22 +64,22 @@ class APIEX extends React.Component{
       })
       .then(data => { // add if statement to catch data.cod === '404' and return a message 'city not found'
         console.log('data', data);
-        console.log('curr temp', data.main.temp)
         this.setState({
           ready: true,
           locationdata: data,
           temp: data.main.temp,
+          feels: data.main.feels_like,
           description: data.weather[0].description,
           name: data.name,
           location: '',
-          country: data.sys.country
+          country: data.sys.country,
+          sunrise: data.sys.sunrise * 1000,
+          sunset: data.sys.sunset * 1000
         })
       })
     }
-    }
-
+  }
     
-
     const handleChange = (e) => {
       this.setState({
         location: e.target.value
@@ -87,12 +91,13 @@ class APIEX extends React.Component{
         <Brand>API example</Brand>
         <Callout>Check current weather</Callout>
         <form onSubmit={handleSubmit}>
-          <Input placeholder="Enter your location" onChange={handleChange} value={this.state.location}/><br/>
-          <Button type="submit" name="submit">Get Weather ></Button>
+          <Input type="text" placeholder="Enter your location" onChange={handleChange} value={this.state.location || ''}/><br/>
+          <Button type="submit" name="submit">Get Weather &rarr;</Button>
           <h4>{this.state.location}</h4>
-          {this.state.temp ? (<h5>Current Temp: {this.state.temp}˚F</h5>) : null}
-          {this.state.description ? (<h6>Conditions: {this.state.description}</h6>) : null}
-          {this.state.name ? (<h6><em>for  {this.state.name}, {this.state.country}</em></h6>) : null}
+          {this.state.temp ? <h5>Current Temp: {this.state.temp}˚F <br /> Feels like: {this.state.feels}˚F</h5> : null}
+          {this.state.description ? <h6>Conditions: {this.state.description}</h6> : null}
+          {this.state.sunrise ? <h6>Sunrise: {dayjs(this.state.sunrise).format(`h:mm A`)}  /  Sunset: {dayjs(this.state.sunset).format(`h:mm A`)}</h6> : null}
+          {this.state.name ? <h6><em>for  {this.state.name}, {this.state.country}</em></h6> : null}
         </form>
       </header>
     )

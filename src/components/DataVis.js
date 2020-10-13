@@ -3,8 +3,6 @@ import styled from 'styled-components'
 import '../App.css';
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Label, ResponsiveContainer } from 'recharts';
 
-
-
 const DataVis = () => {
   const [utahData, setUtahData] = useState([])
   const [isLoaded, setIsLoaded] = useState(false)
@@ -77,7 +75,8 @@ const DataVis = () => {
           <div style={{display: 'flex', padding: '10px auto'}}>
           <label htmlFor="states"><Words>Choose a different state: </Words></label>
           <div style={{padding: "5px"}}>
-          <Select id="states" onChange={(e) => {setQueryState(e.target.value); setStateName(e.target.value.toUpperCase())}}>
+          <Select id="states" onChange={(e) => {setQueryState(e.target.value); 
+            setStateName(e.target.value.toUpperCase())}}>
             <option value="al">Alabama</option>
             <option value="ak">Alaska</option>
             <option value="az">Arizona</option>
