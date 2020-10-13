@@ -93,11 +93,10 @@ class APIEX extends React.Component{
         <form onSubmit={handleSubmit}>
           <Input type="text" placeholder="Enter your location" onChange={handleChange} value={this.state.location || ''}/><br/>
           <Button type="submit" name="submit">Get Weather &rarr;</Button>
-          <h4>{this.state.location}</h4>
+          {this.state.name ? <h4><em>for  {this.state.name}, {this.state.country}</em></h4> : null}
           {this.state.temp ? <h5>Current Temp: {this.state.temp}˚F <br /> Feels like: {this.state.feels}˚F</h5> : null}
           {this.state.description ? <h6>Conditions: {this.state.description}</h6> : null}
           {this.state.sunrise ? <h6>Sunrise: {dayjs(this.state.sunrise).format(`h:mm A`)}  /  Sunset: {dayjs(this.state.sunset).format(`h:mm A`)}</h6> : null}
-          {this.state.name ? <h6><em>for  {this.state.name}, {this.state.country}</em></h6> : null}
         </form>
       </header>
     )
