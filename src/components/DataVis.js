@@ -132,7 +132,6 @@ const DataVis = () => {
           </div>
         {isLoaded ? renderLineChart : 'Loading...'}
         <Words>
-          First positive case was recorded on March 7.<br/>
         <em>Data fetched from covidtracking.com, which is updated daily.</em>
         </Words>
       </header>
