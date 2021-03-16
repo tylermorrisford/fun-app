@@ -67,8 +67,10 @@ const DataVis = () => {
 
     return(
         <header className="App-header">
-        <Callout>{" "}</Callout>
-        <h5>Positive COVID-19 cases in {stateName}</h5>
+        <Callout>The covid tracking project stopped collecting new data on March 7. <br />I'll take this opportunity to 
+          find a better visualization library - more data vis coming...
+        </Callout>
+        {/* <h5>Positive COVID-19 cases in {stateName}</h5>
         <h6>{`Current number of patients hospitalized:
           ${utahData.length > 1 ? utahData[utahData.length -1].hospitalizedCurrently : ''}
           `}</h6>
@@ -133,7 +135,7 @@ const DataVis = () => {
         {isLoaded ? renderLineChart : 'Loading...'}
         <Words>
         <em>Data fetched from covidtracking.com, which is updated daily.</em>
-        </Words>
+        </Words> */}
       </header>
     )
 }
