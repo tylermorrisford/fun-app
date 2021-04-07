@@ -90,7 +90,7 @@ class APIEX extends React.Component{
         <header className="App-header">
         <Brand>API example</Brand>
         <Callout>Check current weather</Callout>
-        <Callout>a.k.a. "Can I go outside?</Callout>
+        <Callout>a.k.a. "Can I go outside?"</Callout>
         <form onSubmit={handleSubmit}>
           <Input type="text" placeholder="Enter your location" onChange={handleChange} value={this.state.location || ''}/><br/>
           <Button type="submit" name="submit">Get Weather &rarr;</Button>
