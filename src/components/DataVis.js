@@ -36,14 +36,14 @@ const DataVis = () => {
           const isMyIndex = element => element.date === "2020-12-01";
           let theIndex = data.findIndex(isMyIndex)
           let filteredData = data.filter( el => data.indexOf(el) > (theIndex - 1))
-          console.log('filtered?', filteredData);
+          console.log('filtered...', filteredData);
           const dash = /-/i;
           const reformatTheDates = (el) => {
             el.date = el.date.slice(5).concat("/", el.date.substring(2,4)).replace(dash, "/")
           }
           filteredData.forEach(el => reformatTheDates(el))
             setCasesData(filteredData.map(el => el.cases));
-            console.log('last element?', filteredData[filteredData.length - 1]); 
+            console.log('last element: ', filteredData[filteredData.length - 1]); 
             setCurrentTotalCases(filteredData[filteredData.length - 1].cases); 
         })    
     }
